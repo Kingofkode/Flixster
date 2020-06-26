@@ -72,12 +72,22 @@
         android:id="@+id/tvReleaseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvOverview"
+        android:layout_below="@+id/tvGenres"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         android:textColor="#FFFFFF"
         tools:text="Released: 2019-01-25" />
+
+    <TextView
+        android:id="@+id/tvGenres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOverview"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        tools:text="Dramas • Gangster Movies" />
 
 </RelativeLayout>

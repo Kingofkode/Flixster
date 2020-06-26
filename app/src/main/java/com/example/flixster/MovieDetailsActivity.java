@@ -17,9 +17,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import okhttp3.Headers;
 
@@ -32,13 +35,15 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
 
     ActivityMovieDetailsBinding binding;
 
+    Map<Integer, String> genreDictionary;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMovieDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
+        inflateGenreDictionary();
         // Unwrap the movie passed via intent, using its simple name as a the key
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
         loadVideoForMovie();
@@ -54,7 +59,42 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         binding.tvVoteCount.setText(String.format("(%s)", countString));
         // Release date of movie
         binding.tvReleaseDate.setText("Released: " + movie.getReleaseDate());
+        // Genres
+        StringBuilder genreString = new StringBuilder();
+        List<Integer> genreIds = movie.getGenresIds();
+        for (int i = 0; i < genreIds.size(); i++) {
+            genreString.append(genreDictionary.get(genreIds.get(i)));
+            if (i != genreIds.size() - 1) {
+                genreString.append(" • ");
+            }
+        }
 
+        binding.tvGenres.setText(genreString.toString());
+    }
+
+    private void inflateGenreDictionary() {
+        // Mapping genre ids to their name
+        // API ref:
+        genreDictionary = new HashMap<>();
+        genreDictionary.put(28, "Action");
+        genreDictionary.put(12, "Adventure");
+        genreDictionary.put(16, "Animation");
+        genreDictionary.put(35, "Comedy");
+        genreDictionary.put(80, "Crime");
+        genreDictionary.put(99, "Documentary");
+        genreDictionary.put(18, "Drama");
+        genreDictionary.put(10751, "Family");
+        genreDictionary.put(14, "Fantasy");
+        genreDictionary.put(36, "History");
+        genreDictionary.put(27, "Horror");
+        genreDictionary.put(10402, "Music");
+        genreDictionary.put(9648, "Mystery");
+        genreDictionary.put(10749, "Romance");
+        genreDictionary.put(878, "Science Fiction");
+        genreDictionary.put(10770, "TV Movie");
+        genreDictionary.put(53, "Thriller");
+        genreDictionary.put(10752, "War");
+        genreDictionary.put(37, "Western");
     }
 
     private void loadVideoForMovie() {

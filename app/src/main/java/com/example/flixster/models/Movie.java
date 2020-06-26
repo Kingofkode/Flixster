@@ -1,5 +1,7 @@
 package com.example.flixster.models;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +21,7 @@ public class Movie {
     Integer voteCount;
     Integer id;
     String releaseDate;
-
+    ArrayList<Integer> genresIds;
     // Required by Parceler
     public Movie() {}
 
@@ -32,6 +34,13 @@ public class Movie {
         this.voteCount = jsonObject.getInt("vote_count");
         this.id = jsonObject.getInt("id");
         this.releaseDate = jsonObject.getString("release_date");
+
+        this.genresIds = new ArrayList<>();
+        JSONArray genreList = jsonObject.getJSONArray("genre_ids");
+        for (int i = 0; i < genreList.length(); i++) {
+            genresIds.add((Integer) genreList.get(i));
+        }
+
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
@@ -73,5 +82,9 @@ public class Movie {
 
     public String getReleaseDate() {
         return releaseDate;
+    }
+
+    public ArrayList<Integer> getGenresIds() {
+        return genresIds;
     }
 }
