@@ -42,7 +42,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+The most difficult part of the project was changing to the data binding UI framework. However, after implementing the framework, I gained a deeper understanding of how Android manages layouts in activities.
 
 ## Open-source libraries used
 
