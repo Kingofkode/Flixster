@@ -74,17 +74,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
             String imageUrl;
+            int placeholderResourceID;
 
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 imageUrl = movie.getBackdropPath();
+                placeholderResourceID = R.drawable.flicks_backdrop_placeholder;
             } else {
                 imageUrl = movie.getPosterPath();
+                placeholderResourceID = R.drawable.flicks_movie_placeholder;
             }
 
             int radius = 30; // corner radius, higher value = more rounded
             int margin = 10; // crop margin, set to 0 for corners with no crop
             Glide.with(context)
                     .load(imageUrl)
+                    .placeholder(placeholderResourceID)
+                    .error(placeholderResourceID)
                     .transform(new RoundedCornersTransformation(radius, margin))
                     .into(ivPoster);
         }
