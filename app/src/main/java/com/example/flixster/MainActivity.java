@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
         // Append API key stored in file that is ignored by git
-        String authenticatedNowPlayingUrl = NOW_PLAYING_URL + "?api_key=" + getString(R.string.TMDBAPI);
+        String authenticatedNowPlayingUrl = NOW_PLAYING_URL + "?api_key=" + getString(R.string.tmdb_api_key);
 
         httpClient.get(authenticatedNowPlayingUrl, new JsonHttpResponseHandler() {
             @Override
