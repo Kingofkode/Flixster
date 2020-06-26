@@ -16,6 +16,7 @@ public class Movie {
     String title;
     String overview;
     Double voteAverage;
+    Integer voteCount;
     Integer id;
 
     // Required by Parceler
@@ -27,6 +28,7 @@ public class Movie {
         this.title = jsonObject.getString("title");
         this.overview = jsonObject.getString("overview");
         this.voteAverage = jsonObject.getDouble("vote_average");
+        this.voteCount = jsonObject.getInt("vote_count");
         this.id = jsonObject.getInt("id");
     }
 
@@ -57,6 +59,10 @@ public class Movie {
 
     public Double getVoteAverage() {
         return voteAverage;
+    }
+
+    public Integer getVoteCount() {
+        return voteCount;
     }
 
     public Integer getId() {

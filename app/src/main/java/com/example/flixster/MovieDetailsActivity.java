@@ -17,6 +17,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import okhttp3.Headers;
 
 public class MovieDetailsActivity extends YouTubeBaseActivity {
@@ -44,6 +48,9 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         // Vote average is 0 - 10, converted to 0 - 5 by dividing by 2
         float voteAverage = movie.getVoteAverage().floatValue();
         binding.rbVoteAverage.setRating(voteAverage > 0 ? voteAverage / 2.0f : voteAverage);
+        // To insert commas where necessary. i.e. 1000 -> 1,000
+        String countString = NumberFormat.getNumberInstance(Locale.US).format(movie.getVoteCount());
+        binding.tvVoteCount.setText(String.format("(%s)", countString));
 
     }
 

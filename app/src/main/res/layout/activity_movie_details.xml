@@ -28,7 +28,8 @@
         android:layout_marginRight="2dp"
         android:text="Movie Title"
         android:textAppearance="@android:style/TextAppearance.Large"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        tools:text="Britt-Marie Was Here" />
 
     <TextView
         android:id="@+id/tvOverview"
@@ -40,7 +41,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:text="TextView"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        tools:text="Britt-Marie, a woman in her sixties, decides to leave her husband and start anew. Having been housewife for most of her life and and living in small backwater town of Borg, there isn't many jobs available and soon she finds herself fending a youth football team." />
 
     <RatingBar
         android:id="@+id/rbVoteAverage"
@@ -53,5 +55,17 @@
         android:numStars="5"
         android:rating="5"
         android:stepSize="0.5" />
+
+    <TextView
+        android:id="@+id/tvVoteCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="-3dp"
+        android:layout_toEndOf="@+id/rbVoteAverage"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        tools:text="(1,000)" />
 
 </RelativeLayout>
