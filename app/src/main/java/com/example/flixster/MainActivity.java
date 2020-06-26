@@ -3,6 +3,7 @@ package com.example.flixster;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.flixster.adapters.MovieAdapter;
+import com.example.flixster.databinding.ActivityMainBinding;
 import com.example.flixster.models.Movie;
 
 import org.json.JSONArray;
@@ -32,18 +34,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         // Set Action Bar text color to red
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"red\">" + "FLIXSTER" + "</font>"));
 
-        RecyclerView rvMovies = findViewById(R.id.rvMovies);
         movies = new ArrayList<>();
         // Create the adapter
         final MovieAdapter movieAdapter = new MovieAdapter(this, movies);
         // Set the recycler's view adapter
-        rvMovies.setAdapter(movieAdapter);
+        binding.rvMovies.setAdapter(movieAdapter);
         // Set a layout manager on the recycler view
-        rvMovies.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvMovies.setLayoutManager(new LinearLayoutManager(this));
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
