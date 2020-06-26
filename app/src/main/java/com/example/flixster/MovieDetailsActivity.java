@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,7 +26,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     // Movie to display
     Movie movie;
-
+    String videoID;
+    public static final String VIDEO_ID_EXTRA = "videoID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     public void onTrailerClick(View view) {
         Intent movieTrailerIntent = new Intent(this, MovieTrailerActivity.class);
-        this.startActivity(movieTrailerIntent);
+        if (videoID != null) {
+            movieTrailerIntent.putExtra(VIDEO_ID_EXTRA, videoID);
+            this.startActivity(movieTrailerIntent);
+        }
+
     }
 
     private void loadVideoForMovie() {
-        String videosUrl = "https://api.themoviedb.org/3/movie/" + movie.getId() + "videos" + "?api_key=" + getString(R.string.tmdb_api_key);
+        String videosUrl = "https://api.themoviedb.org/3/movie/" + movie.getId() + "/videos" + "?api_key=" + getString(R.string.tmdb_api_key);
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.get(videosUrl, new JsonHttpResponseHandler() {
@@ -65,8 +71,13 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 Log.d(TAG, "onSuccess");
                 try {
                     JSONArray results = responseObject.getJSONArray("results");
+                    if (results.getJSONObject(0) != null) {
+                        String key = results.getJSONObject(0).getString("key");
+                        videoID = key;
+                        Toast.makeText(MovieDetailsActivity.this, "Got key", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "JSON Exception", e);
                 }
             }
 
