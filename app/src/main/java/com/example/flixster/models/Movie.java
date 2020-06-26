@@ -18,6 +18,7 @@ public class Movie {
     Double voteAverage;
     Integer voteCount;
     Integer id;
+    String releaseDate;
 
     // Required by Parceler
     public Movie() {}
@@ -30,6 +31,7 @@ public class Movie {
         this.voteAverage = jsonObject.getDouble("vote_average");
         this.voteCount = jsonObject.getInt("vote_count");
         this.id = jsonObject.getInt("id");
+        this.releaseDate = jsonObject.getString("release_date");
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException {
@@ -67,5 +69,9 @@ public class Movie {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
     }
 }

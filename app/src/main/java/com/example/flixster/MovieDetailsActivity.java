@@ -48,9 +48,12 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         // Vote average is 0 - 10, converted to 0 - 5 by dividing by 2
         float voteAverage = movie.getVoteAverage().floatValue();
         binding.rbVoteAverage.setRating(voteAverage > 0 ? voteAverage / 2.0f : voteAverage);
+        // Vote count left of rating bar
         // To insert commas where necessary. i.e. 1000 -> 1,000
         String countString = NumberFormat.getNumberInstance(Locale.US).format(movie.getVoteCount());
         binding.tvVoteCount.setText(String.format("(%s)", countString));
+        // Release date of movie
+        binding.tvReleaseDate.setText("Released: " + movie.getReleaseDate());
 
     }
 
